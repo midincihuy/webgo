@@ -1,14 +1,13 @@
-package main 
+package main
 
-
-import "github.com/gofiber/fiber/v2"
+import (
+	"fmt"
+	"midincihuy/webgo/bootstrap"
+	"midincihuy/webgo/pkg/env"
+	"log"
+)
 
 func main() {
-	app := fiber.New()
-
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
-
-	app.Listen(":3030")
+	app := bootstrap.NewApplication()
+	log.Fatal(app.Listen(fmt.Sprintf("%s:%s", env.GetEnv("APP_HOST", "localhost"), env.GetEnv("APP_PORT", "4000"))))
 }
